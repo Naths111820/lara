@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Portfolio - Lara Alcuetas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-blur bg1"></div>
+<div class="bg-blur bg2"></div> 
+<div class="bg-grid"></div>
+
+<div id="progress-bar"></div>
+
+<header class="navbar">
+  <div class="logo">
+    <div class="logo-circle">WEB1</div>
+  </div>
+
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#home">HOME</a></li>
+      <li><a href="#about">ABOUT US</a></li>
+      <li><a href="#projects">PROJECTS</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HOME -->
+<section id="home" class="home reveal">
+  <div class="home-text">
+    <h1>Portfolio:<br><span id="typing-name"></span></h1>
+    <p class="course">BSCS - 2A</p>
+  </div>
+
+  <div class="home-image">
+    <img src="lara.jpg" alt="Lara">
+  </div>
+</section>
+
+<!-- ABOUT --> 
+ <section id="about" class="about-page reveal">
+   <h1 class="section-title">About Me</h1> <div class="about-card"> 
+    <p> Hi! I'm <strong>Lara Alcuetas</strong>, a second-year BS Computer Science student. 
+      I love building websites and solving real-world problems using technology. </p>
+       <p>My skills include:</p>
+        <ul>
+           <li>Web Development (HTML, CSS, JavaScript)</li> 
+           <li>Programming (Python / Java / C)</li>
+            <li>Database Management</li> 
+        </ul> 
+        <p> My goal is to become a skilled software developer creating innovative, user-friendly applications. </p>
+       </div> 
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-page reveal">
+  <h1 class="section-title">PROJECTS</h1>
+
+  <div class="project-scroll">
+
+    <!-- Web1 -->
+    <div class="project-card">
+      <div class="subject-circle">Web1</div>
+      <div class="file-list">
+        <a href="les1.1.png">LESSON1PIC1</a>
+        <a href="les1.2.png">LESSON1PIC2</a>
+        <a href="les2.mp4">LESSON2</a>
+        <a href="les3.mp4">LESSON3</a>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+
+    <!-- Entrep -->
+    <div class="project-card">
+      <div class="subject-circle">IntroTC</div>
+      <div class="file-list">
+        <a href="html.pdf">HTML_Project</a>
+        <a href="htmlprog.pdf">ITC_Project</a>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+
+    <!-- Algo -->
+    <div class="project-card">
+      <div class="subject-circle">Algo</div>
+      <div class="file-list">
+        <a href="Output_activity1.png">Output_activity1</a>
+        <a href="Output_Activity2.png">Output_Activity2</a>
+        <a href="Output_Activity3.png">Output_Activity3</a>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+
+    <!-- Multimedia -->
+    <div class="project-card">
+      <div class="subject-circle">Discrete</div>
+      <div class="file-list">
+        <a href="Binomial.pdf">Binomial_Theorem</a>
+        <a href="pm.pdf">Permutation_and</a>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+
+    <!-- random sub -->
+    <div class="project-card">
+      <div class="subject-circle">Random</div>
+      <div class="file-list">
+        <a href="it.pdf">LivingInITEra</a>
+        <a href="spred.xlsx">LivingInITEra2</a>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-page reveal">
+  <div class="contact-header">
+    <h1>CONTACT ME!</h1>
+    <div class="contact-divider"></div>
+    <div class="contact-info">
+      <div class="info-box">📞 09100923561</div>
+      <div class="info-box">📧 laraalcuetas@gmail.com</div>
+    </div>
+  </div>
+</section>
+
+<script>
+
+/* Scroll Spy + Progress */
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-links a");
+const progressBar = document.getElementById("progress-bar");
+
+window.addEventListener("scroll", () => {
+  let current = "";
+  const scrollY = window.pageYOffset;
+  const pageHeight = document.documentElement.scrollHeight;
+  const viewportHeight = window.innerHeight;
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 200;
+    if (scrollY >= sectionTop) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  if (scrollY + viewportHeight >= pageHeight - 5) {
+    current = sections[sections.length - 1].id;
+  }
+
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === "#" + current) {
+      link.classList.add("active");
+    }
+  });
+
+  const scrollPercent =
+    (scrollY / (pageHeight - viewportHeight)) * 100;
+  progressBar.style.width = scrollPercent + "%";
+});
+
+/* Reveal */
+const reveals = document.querySelectorAll(".reveal");
+
+function revealOnScroll() {
+  const windowHeight = window.innerHeight;
+  reveals.forEach(element => {
+    if (element.getBoundingClientRect().top < windowHeight - 100) {
+      element.classList.add("active");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+
+/* Typing */
+const text = "Lara Alcuetas";
+let index = 0;
+
+function typeEffect() {
+  if (index < text.length) {
+    document.getElementById("typing-name").innerHTML += text.charAt(index);
+    index++;
+    setTimeout(typeEffect, 100);
+  }
+}
+typeEffect();
+
+</script>
+
+</body>
+</html>
